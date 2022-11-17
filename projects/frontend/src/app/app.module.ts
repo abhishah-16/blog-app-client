@@ -8,6 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SinglePostComponent } from './components/single-post/single-post.component';
 import { HomeComponent } from './components/home/home.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
+import { ToolsModule } from 'projects/tools/src/public-api';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CategoryListComponent } from './components/category-list/category-list.
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ToolsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

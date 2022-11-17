@@ -30,5 +30,8 @@ export class ApiService {
     return this.http.get<Post[]>(`${this.Url}/post`)
   }
 
+  getPostBySlug(slug: string): Observable<Post> {
+    return this.http.get<Post>(`${this.Url}/post/slug/${slug}`)
+  }
 
 }

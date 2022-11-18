@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from 'projects/models/category.interface';
+import { ApiService } from 'projects/tools/src/lib/api.service';
 
 @Component({
   selector: 'app-category-list',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./category-list.component.css']
 })
 export class CategoryListComponent implements OnInit {
-
-  constructor() { }
+  categories: Category[] = []
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
+    this.api.getAllCategories().subscribe((res) => {
+      this.categories = res.filter(c => c.title != 'uncategorized')
+    })
   }
 
 }

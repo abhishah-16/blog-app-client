@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from 'projects/models/user.interface';
 import { Router } from '@angular/router';
 import { Post } from 'projects/models/post.interface';
+import { Category } from 'projects/models/category.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,10 @@ export class ApiService {
 
   getPostBySlug(slug: string): Observable<Post> {
     return this.http.get<Post>(`${this.Url}/post/slug/${slug}`)
+  }
+
+  getAllCategories():Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.Url}/category`)
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from 'projects/models/category.interface';
 import { Post } from 'projects/models/post.interface';
 import { ApiService } from 'projects/tools/src/lib/api.service';
 
@@ -9,6 +10,7 @@ import { ApiService } from 'projects/tools/src/lib/api.service';
 })
 export class HomeComponent implements OnInit {
   posts: Post[] = []
+ 
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {

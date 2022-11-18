@@ -9,7 +9,8 @@ import { ApiService } from 'projects/tools/src/lib/api.service';
 })
 export class CategoryListComponent implements OnInit {
   categories: Category[] = []
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService,
+   ) { }
 
   ngOnInit(): void {
     this.api.getAllCategories().subscribe((res) => {

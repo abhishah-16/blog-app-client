@@ -1,6 +1,5 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { Category } from 'projects/models/category.interface';
 import { Post } from 'projects/models/post.interface';
 import { ApiService } from 'projects/tools/src/lib/api.service';
 import { map, Subject, takeUntil } from 'rxjs';

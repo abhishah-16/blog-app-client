@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Category } from 'projects/models/category.interface';
 import { Post } from 'projects/models/post.interface';
 import { ApiService } from 'projects/tools/src/lib/api.service';
+import { map, Subject, takeUntil } from 'rxjs';
+
 
 @Component({
   selector: 'app-home',
@@ -9,11 +13,29 @@ import { ApiService } from 'projects/tools/src/lib/api.service';
 })
 export class HomeComponent implements OnInit {
   posts: Post[] = []
-  constructor(private api: ApiService) { }
+  sub$ = new Subject
+  constructor(private api: ApiService,
+    private router: Router,
+    private routes: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.api.getAllPost().subscribe((res) => {
-      this.posts = res
+
+    this.routes.paramMap.pipe(
+      takeUntil(this.sub$)
+    ).subscribe(param => {
+      const cattitle = param.get('title')
+      if (this.router.url == `/post/category/${cattitle}`) {
+        this.api.getAllPost().pipe(
+          map(posts => posts.filter(p => p.category.title == cattitle)),
+          takeUntil(this.sub$)
+        ).subscribe((res) => {
+          this.posts = res
+        })
+      } else {
+        this.api.getAllPost().subscribe((res) => {
+          this.posts = res
+        })
+      }
     })
   }
 
